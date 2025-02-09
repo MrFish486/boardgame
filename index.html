@@ -1,0 +1,24 @@
+<head>
+	<link rel="stylesheet" href="index.css"></link>
+	<script src="main.js"></script>
+</head>
+<body>
+	<h2>Welcome to the boardgame.</h2>
+	<br>
+	<div style="border:2px solid black;">
+		<canvas id="main" width="500px" height="500px" style="border:2px solid black;"></canvas><br>
+		<a id="score" class="score">Game hasn't started. Press start.<br>If you have, then something's broken. Check the console for error messages. (F12)</a>
+		<button onclick="location.reload()">Restart</button>
+		<button onclick="STOPGAME()">Stop</button>
+		<button onclick="tickID=setInterval(tickfunction,10)">Start</button>
+		<br>
+		<a>Bot 1:</a>
+		<select id="bot1" onchange="x.bots[0]=botoptions[parseInt(this.value)]">
+			
+		</select>
+		<a>Bot 2:</a>
+		<select id="bot2" onchange="x.bots[1]=botoptions[parseInt(this.value)]">
+
+		</select>
+	</div>
+</body>

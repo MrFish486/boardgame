@@ -1,0 +1,30 @@
+* {
+        text-align:center;
+        display:inline-block;
+        margin:0px;
+        padding:0px;
+}
+.score {
+	width:300px;
+	border:2px solid black;
+	margin:0px;
+	padding:0px;
+}
+div {
+        margin:0px;
+        padding:0px;
+        background-color: coral;
+}
+body {
+        background-color: 7ba9d1;
+}
+canvas {
+        background-color: wheat;
+}
+button {
+        background-color: wheat;
+        width:50px;
+}
+option {
+        background-color: wheat;
+}
