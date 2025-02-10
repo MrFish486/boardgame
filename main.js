@@ -230,7 +230,7 @@ BlobbingBodhi=new bot("Blobbing Bodhi",(board,game,me)=>{
         return valid[Math.floor(Math.random()*valid.length)]
     }
 })
-botoptions=[BrainlessBob,StupidSam,ActiveAndy,CopycatCole,GarbageGabriel,IllegitimateIvan,CheatyCharles,BraindeadBilly,StrategicSamuel,BlobbingBodhi]
+botoptions=[BrainlessBob,ActiveAndy,CopycatCole,GarbageGabriel,IllegitimateIvan,CheatyCharles,StrategicSamuel,BlobbingBodhi]
 //Run:
 
 
