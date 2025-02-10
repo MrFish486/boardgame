@@ -10,6 +10,8 @@ class board{
         this.bots=bots
         this.bots[0].color=1
         this.bots[1].color=2
+        this.bots[0].opponent=this.bots[1]
+        this.bots[1].opponent=this.bots[0]
         this.height=height
         this.width=width
         this.tiles=width*height
@@ -38,8 +40,12 @@ class board{
     }
     tick(){
         let copy=this.board
-        let bot0=this.bots[0].main(this.board,this,this.bots[0])
-        let bot1=this.bots[1].main(this.board,this,this.bots[1])
+        try{
+            var bot0move=this.bots[0].main(this.board,this,this.bots[0])
+        }catch{}
+        try{
+            var bot1move=this.bots[1].main(this.board,this,this.bots[1])
+        }catch{}
         for(let x=0;x<this.width;x++){
             for(let y=0;y<this.width;y++){
                 let q=this.nieghbor(x,y)
@@ -51,9 +57,13 @@ class board{
                 q=undefined
             }
         }
-        if(JSON.stringify(bot0)!=JSON.stringify(bot1)){
-            copy[bot0[0]][bot0[1]]=1
-            copy[bot1[0]][bot1[1]]=2
+        if(JSON.stringify(bot0move)!=JSON.stringify(bot1move)){
+            try{
+                copy[bot0move[0]][bot0move[1]]=1
+            }catch{}
+            try{
+                copy[bot1move[0]][bot1move[1]]=2
+            }catch{}
         }
         this.board=copy
     }
@@ -122,6 +132,7 @@ class bot{
         this.name=name_
         this.color=null
         this.memory={}
+        this.opponent=null
         init=init||function(){}
         this.init=init
         init(this)
@@ -143,6 +154,7 @@ ActiveAndy=new bot("Active Andy",(board,game,me)=>{
             }
         }
     }
+    return [0,0]
 })
 
 CopycatCole=new bot("Copy-cat Cole",(board,game,me)=>{
@@ -165,6 +177,7 @@ CopycatCole=new bot("Copy-cat Cole",(board,game,me)=>{
             }catch{}
         }
     }
+    return [0,0]
 })
 GarbageGabriel=new bot("Garbage Gabriel",(board,game,me)=>{
     for(let x=game.width;x>0;x--){
@@ -174,6 +187,7 @@ GarbageGabriel=new bot("Garbage Gabriel",(board,game,me)=>{
             }
         }
     }
+    return [0,0]
 })
 IllegitimateIvan=new bot("Illegitimate Ivan",(board,game,me)=>{
     let cp=me.memory["pos"]
@@ -181,25 +195,68 @@ IllegitimateIvan=new bot("Illegitimate Ivan",(board,game,me)=>{
     me.memory["pos"][1]+=Math.floor(Math.random()*3)-1
     try{board[me.memory["pos"][0]][me.memory["pos"][1]]}catch{me.memory["pos"]=cp}
     return me.memory["pos"]
+    return [0,0]
 },(me)=>{
     me.memory["pos"]=[Math.floor(Math.random()*20),Math.floor(Math.random()*20)]
 })
-botoptions=[BrainlessBob,StupidSam,ActiveAndy,CopycatCole,GarbageGabriel,IllegitimateIvan]
+CheatyCharles=new bot("Cheaty Charles",(board,game,me)=>{
+    game.exec((a,b)=>{x.board[a][b]=me.color})
+    if(me.color==1){
+        game.bots[1]=BraindeadBilly
+    }else{
+        game.bots[0]=BraindeadBilly
+    }
+    BOT2=BraindeadBilly
+    return [0,0]
+})
+BraindeadBilly=new bot("Braindead Billy",(board,game,me)=>{
+    return [0,0]
+})
+StrategicSamuel=new bot("Strategic Samuel",(board,game,me)=>{
+    if(ticks%2==0){
+        for(let x=0;x<game.width;x++){
+            for(let y=0;y<game.width;y++){
+                if(board[x][y]!=me.color){
+                    return [x,y]
+                }
+            }
+        }
+    }else{
+        return [Math.floor(Math.random()*board.length),Math.floor(Math.random()*board.length)]
+    }
+    return [0,0]
+})
+BlobbingBodhi=new bot("Blobbing Bodhi",(board,game,me)=>{
+    let valid=[]
+    game.exec((a,b)=>{
+        if(game.nieghbor(a,b)[me.color-1]==2&&!(board[a][b]==me.color)){
+            valid.push([a,b])
+        }
+    })
+    if(valid.length==0){
+        return [Math.floor(Math.random()*board.length),Math.floor(Math.random()*board.length)]
+    }else{
+        return valid[Math.floor(Math.random()*valid.length)]
+    }
+})
+botoptions=[BrainlessBob,StupidSam,ActiveAndy,CopycatCole,GarbageGabriel,IllegitimateIvan,CheatyCharles,BraindeadBilly,StrategicSamuel,BlobbingBodhi]
 //Run:
 
 
 
-x=new board(20,20,[BrainlessBob,BrainlessBob])
+x=new board(50,50,[BrainlessBob,BrainlessBob])
 ticks=0
 targetTicks=3000
+BOT1=BrainlessBob
+BOT2=BrainlessBob
 init=()=>{
     document.getElementById("bot1").innerHTML=''
     document.getElementById("bot2").innerHTML=''
     botoptions.forEach((v,i)=>{
-        let node1=document.createElement("option")
+        var node1=document.createElement("option")
         node1.innerHTML=v.name
         node1.value=i
-        node2=node1.cloneNode(true)
+        var node2=node1.cloneNode(true)
         document.getElementById("bot1").appendChild(node1)
         document.getElementById("bot2").appendChild(node2)
     })
@@ -212,8 +269,8 @@ tickfunction=()=>{
     x.tick()
     x.render(document.getElementById("main"))
     let c=x.count()
-    let b0=`${x.bots[0].name} (Orange):${c[0]}`
-    let b1=`${x.bots[1].name}  (Green):${c[1]}`
+    let b0=`${x.bots[0].name} (Orange):${c[0]} (${Math.round(1000*(c[0]/x.tiles))/10}%)`
+    let b1=`${x.bots[1].name}  (Green):${c[1]} (${Math.round(1000*(c[1]/x.tiles))/10}%)`
     document.getElementById("score").innerHTML=`${b1}<br>${b0}<br>Days:${ticks}`
     if(c[0]>c[1]){
         document.getElementById("score").style.backgroundColor="rgb(230,131,28)"
