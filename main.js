@@ -244,7 +244,7 @@ botoptions=[BrainlessBob,StupidSam,ActiveAndy,CopycatCole,GarbageGabriel,Illegit
 
 
 
-x=new board(50,50,[BrainlessBob,BrainlessBob])
+boardgame=new board(50,50,[BrainlessBob,BrainlessBob])
 ticks=0
 targetTicks=3000
 BOT1=BrainlessBob
@@ -266,9 +266,9 @@ tickfunction=()=>{
     if(ticks>=targetTicks){
         STOPGAME()
     }
-    x.tick()
-    x.render(document.getElementById("main"))
-    let c=x.count()
+    boardgame.tick()
+    boardgame.render(document.getElementById("main"))
+    let c=boardgame.count()
     let b0=`${x.bots[0].name} (Orange):${c[0]} (${Math.round(1000*(c[0]/x.tiles))/10}%)`
     let b1=`${x.bots[1].name}  (Green):${c[1]} (${Math.round(1000*(c[1]/x.tiles))/10}%)`
     document.getElementById("score").innerHTML=`${b1}<br>${b0}<br>Days:${ticks}`
