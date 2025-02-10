@@ -141,11 +141,6 @@ class bot{
 BrainlessBob=new bot("Brainless Bob",(board,game,me)=>{
     return [Math.floor(Math.random()*board.length),Math.floor(Math.random()*board.length)]
 })
-StupidSam=new bot("Stupid Sam",(board,game,me)=>{
-    if(game.bots.includes(ActiveAndy)){return [0,0]}
-    return [3,3]
-})
-
 ActiveAndy=new bot("Active Andy",(board,game,me)=>{
     for(let x=0;x<game.width;x++){
         for(let y=0;y<game.width;y++){
@@ -202,14 +197,10 @@ IllegitimateIvan=new bot("Illegitimate Ivan",(board,game,me)=>{
 CheatyCharles=new bot("Cheaty Charles",(board,game,me)=>{
     game.exec((a,b)=>{x.board[a][b]=me.color})
     if(me.color==1){
-        game.bots[1]=BraindeadBilly
+        game.bots[1]=UselessUriel
     }else{
-        game.bots[0]=BraindeadBilly
+        game.bots[0]=UselessUriel
     }
-    BOT2=BraindeadBilly
-    return [0,0]
-})
-BraindeadBilly=new bot("Braindead Billy",(board,game,me)=>{
     return [0,0]
 })
 StrategicSamuel=new bot("Strategic Samuel",(board,game,me)=>{
