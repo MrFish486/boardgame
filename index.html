@@ -8,8 +8,8 @@
 	<div style="border:2px solid black;">
 		<canvas id="main" width="500px" height="500px" style="border:2px solid black;"></canvas><br>
 		<a id="score" class="score">Game hasn't started. Press start.<br>If you have, then something's broken. Check the console for error messages. (F12)</a>
-		<button onclick="STOPGAME();x=new board(50,50,[BOT1,BOT2]);document.getElementById('main').width=document.getElementById('main').width;ticks=0;document.getElementById('score').style.backgroundColor='coral';document.getElementById('score').innerHTML=`Game hasn't started. Press start.<br>If you have, then something's broken. Check the console for error messages. (F12)`">Reset</button>
-		<button onclick="STOPGAME();x=new board(50,50,[BOT1,BOT2]);tickID=setInterval(tickfunction,1)">Start</button>
+		<button onclick="STOPGAME();boardgame=new board(50,50,[BOT1,BOT2]);document.getElementById('main').width=document.getElementById('main').width;ticks=0;document.getElementById('score').style.backgroundColor='coral';document.getElementById('score').innerHTML=`Game hasn't started. Press start.<br>If you have, then something's broken. Check the console for error messages. (F12)`">Reset</button>
+		<button onclick="STOPGAME();boardgame=new board(50,50,[BOT1,BOT2]);tickID=setInterval(tickfunction,1)">Start</button>
 		<br>
 		<a>Bot 1:</a>
 		<select id="bot1" onchange="BOT1=botoptions[parseInt(this.value)]">
