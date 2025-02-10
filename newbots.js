@@ -10,7 +10,7 @@ bot.color, the bot's color. Either 1 or 2, because a square can be either 0 (emp
 bot.opponent, the bot's opponent. bot.opponent is a bot object.
 
 The game argument has a few useful functions.
-game.exec( function(x,y) ) calls the function on every x y position of the board.
+game.exec( function( x, y ) ) calls the function on every x y position of the board.
 game.neighbor( x, y ) finds all of the neighbors of position x y. Returns a list, where item 1 is the number of neighboring orange tiles, and item 2 is the number of neighboring green tiles. NOTE: uses the Von Neumann neighborhood.
 */
 UselessUriel=new bot("Useless Uriel",(board,game,me)=>{return}); //This bot won't move.
