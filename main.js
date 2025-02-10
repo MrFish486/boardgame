@@ -269,8 +269,8 @@ tickfunction=()=>{
     boardgame.tick()
     boardgame.render(document.getElementById("main"))
     let c=boardgame.count()
-    let b0=`${x.bots[0].name} (Orange):${c[0]} (${Math.round(1000*(c[0]/x.tiles))/10}%)`
-    let b1=`${x.bots[1].name}  (Green):${c[1]} (${Math.round(1000*(c[1]/x.tiles))/10}%)`
+    let b0=`${boardgame.bots[0].name} (Orange):${c[0]} (${Math.round(1000*(c[0]/boardgame.tiles))/10}%)`
+    let b1=`${boardgame.bots[1].name}  (Green):${c[1]} (${Math.round(1000*(c[1]/boardgame.tiles))/10}%)`
     document.getElementById("score").innerHTML=`${b1}<br>${b0}<br>Days:${ticks}`
     if(c[0]>c[1]){
         document.getElementById("score").style.backgroundColor="rgb(230,131,28)"
