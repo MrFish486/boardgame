@@ -254,9 +254,6 @@ init=()=>{
 }
 setTimeout(init,10)
 tickfunction=()=>{
-    if(ticks>=targetTicks){
-        STOPGAME()
-    }
     boardgame.tick()
     boardgame.render(document.getElementById("main"))
     let c=boardgame.count()
@@ -271,6 +268,20 @@ tickfunction=()=>{
         document.getElementById("score").style.backgroundColor="wheat"
     }
     ticks++
+    if(ticks>=targetTicks){
+        STOPGAME()
+        if(c[0]>c[1]){
+            document.getElementById("score").style.backgroundColor="rgb(230,131,28)"
+            document.getElementById("score").innerHTML=`${boardgame.bots[0].name} (Orange) won!`
+        }else if(c[0]<c[1]){
+            document.getElementById("score").style.backgroundColor="rgb(117,212,135)"
+            document.getElementById("score").innerHTML=`${boardgame.bots[1].name} (Green) won!`
+        }else{
+            document.getElementById("score").style.backgroundColor="wheat"
+            document.getElementById("score").innerHTML=`Tie!`
+        }
+    }
+
 }
 var tickID;
 STOPGAME=()=>{clearInterval(tickID)}
