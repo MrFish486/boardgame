@@ -346,7 +346,7 @@ tickfunction=()=>{
 	    document.getElementById("score").innerHTML=`${boardgame.bots[2].name} (Purple) won!<br>${b3}<br>${b2}<br>${b1}<br>${b0}<br>Days:${ticks}`
 	}else if(c[3]>c[2]&&c[3]>c[1]&&c[3]>c[0]){
 	    document.getElementById("score").style.backgroundColor="rgb(162,12,4)"
-            document.getElementById("score").innerHTML=`${boardgame.bots[4].name} (Purple) won!<br>${b3}<br>${b2}<br>${b1}<br>${b0}<br>Days:${ticks}`
+            document.getElementById("score").innerHTML=`${boardgame.bots[3].name} (Purple) won!<br>${b3}<br>${b2}<br>${b1}<br>${b0}<br>Days:${ticks}`
 	}else{
             document.getElementById("score").style.backgroundColor="wheat"
             document.getElementById("score").innerHTML=`Tie!<br>${b3}<br>${b2}<br>${b1}<br>${b0}<br>Days:${ticks}`
